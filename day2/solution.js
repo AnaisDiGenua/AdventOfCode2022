@@ -1,5 +1,6 @@
-const input =  ` 
-B Z
+//input
+const input =  
+`B Z
 B X
 C Y
 B Y
@@ -2498,6 +2499,120 @@ C Y
 B Y
 B Y
 C Y
-B Y
-`;
+B Y`;
 
+
+//1. divido in stringhe
+const oldArray = input.split('\n');
+
+//2. trasformo le stringhe in singoli array con due elementi
+const newArray = oldArray.map((str) => str.split('\n').join(" ").split(" "));
+
+//console.log(newArray[0][0]); // A
+
+//----------------------- GAME ---------------------------
+let scorePlayer1 = 0;
+let scorePlayer2 = 0;
+let rock = 1;
+let paper = 2;
+let scissors =3;
+let lose = 0;
+let draw = 3;
+let win = 6;
+
+//player1      /player2
+//A = rock     / X = rock
+//B = paper    / Y = paper
+//C = scissors / Z = scissors
+
+//SHAPE SCORE
+//rock 1pt
+//paper 2pt
+//scissors 3pt
+
+//SCORE
+//lose 0pt
+//draw 3pt
+//win 6pt
+
+for(let i = 0; i < newArray.length; i++) {
+    if(newArray[i][0] == 'A' && newArray[i][1] == 'Z') {
+        scorePlayer1 = scorePlayer1 + rock + win;
+        scorePlayer2 = scorePlayer2 + scissors + lose;
+    } else if(newArray[i][0] == 'B' && newArray[i][1] == 'X') {
+        scorePlayer1 = scorePlayer1 + paper + win;
+        scorePlayer2 = scorePlayer2 + rock + lose;
+    } else if(newArray[i][0] == 'C' && newArray[i][1] == 'Y') {
+        scorePlayer1 = scorePlayer1 + scissors + win;
+        scorePlayer2 = scorePlayer2 + paper + lose;
+    } else if(newArray[i][0] == 'A' && newArray[i][1] == 'Y') {
+        scorePlayer1 = scorePlayer1 + rock + lose;
+        scorePlayer2 = scorePlayer2 + paper + win;
+    } else if(newArray[i][0] == 'B' && newArray[i][1] == 'Z') {
+        scorePlayer1 = scorePlayer1 + paper + lose;
+        scorePlayer2 = scorePlayer2 + scissors + win;
+    } else if(newArray[i][0] == 'C' && newArray[i][1] == 'X') {
+        scorePlayer1 = scorePlayer1 + scissors + lose;
+        scorePlayer2 = scorePlayer2 + rock + win;
+    } else if(newArray[i][0] == 'A' && newArray[i][1] == 'X') {
+        scorePlayer1 = scorePlayer1 + rock + draw;
+        scorePlayer2 = scorePlayer2 + rock + draw;
+    } else if(newArray[i][0] == 'B' && newArray[i][1] == 'Y') {
+        scorePlayer1 = scorePlayer1 + paper + draw;
+        scorePlayer2 = scorePlayer2 + paper + draw;
+    } else if(newArray[i][0] == 'C' && newArray[i][1] == 'Z') {
+        scorePlayer1 = scorePlayer1 + scissors + draw;
+        scorePlayer2 = scorePlayer2 + scissors + draw;
+    }
+}
+
+//OUTPUT
+console.log(scorePlayer2);
+
+
+
+
+//-------------------------PART 2---------------------------------
+let newScorePlayer1 = 0;
+let newScorePlayer2 = 0;
+
+//RULES
+//X = lose
+//Y = draw
+//Z = win
+
+for(let i = 0; i < newArray.length; i++) {
+    if(newArray[i][0] == 'A' && newArray[i][1] == 'Z') {
+        newScorePlayer1 = newScorePlayer1 + rock + lose;
+        newScorePlayer2 = newScorePlayer2 + paper + win;
+    } else if(newArray[i][0] == 'B' && newArray[i][1] == 'X') {
+        newScorePlayer1 = newScorePlayer1 + paper + win;
+        newScorePlayer2 = newScorePlayer2 + rock + lose;
+    } else if(newArray[i][0] == 'C' && newArray[i][1] == 'Y') {
+        newScorePlayer1 = newScorePlayer1 + scissors + draw;
+        newScorePlayer2 = newScorePlayer2 + scissors + draw;
+    } else if(newArray[i][0] == 'A' && newArray[i][1] == 'Y') {
+        newScorePlayer1 = newScorePlayer1 + rock + draw;
+        newScorePlayer2 = newScorePlayer2 + rock + draw;
+    } else if(newArray[i][0] == 'B' && newArray[i][1] == 'Z') {
+        newScorePlayer1 = newScorePlayer1 + paper + lose;
+        newScorePlayer2 = newScorePlayer2 + scissors + win;
+    } else if(newArray[i][0] == 'C' && newArray[i][1] == 'X') {
+        newScorePlayer1 = newScorePlayer1 + scissors + win;
+        newScorePlayer2 = newScorePlayer2 + paper + lose;
+    } else if(newArray[i][0] == 'A' && newArray[i][1] == 'X') {
+        newScorePlayer1 = newScorePlayer1 + rock + win;
+        newScorePlayer2 = newScorePlayer2 + scissors + lose;
+    } else if(newArray[i][0] == 'B' && newArray[i][1] == 'Y') {
+        newScorePlayer1 = newScorePlayer1 + paper + draw;
+        newScorePlayer2 = newScorePlayer2 + paper + draw;
+    } else if(newArray[i][0] == 'C' && newArray[i][1] == 'Z') {
+        newScorePlayer1 = newScorePlayer1 + scissors + lose;
+        newScorePlayer2 = newScorePlayer2 + rock + win;
+    }
+}
+
+
+
+//OUTPUT
+console.log(newScorePlayer2);
